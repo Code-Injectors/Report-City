@@ -1,0 +1,49 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Issues</ion-title>
+    <ion-buttons end>
+        <button ion-button (click)="searchToggle()" clear>
+            <ion-icon name="funnel"></ion-icon>
+        </button>
+    </ion-buttons>
+  </ion-navbar>
+  
+</ion-header>
+<ion-content padding>
+    <ion-list *ngFor="let report of reports">
+        <ion-card>
+            <ion-item>
+                <ion-avatar item-left>
+                    <img src="https://www.gravatar.com/avatar/{{user.email_hash}}">
+                </ion-avatar>
+                <h2>{{report.title}}</h2>
+                <p>{{report.category}}</p>
+            </ion-item>
+            <img src="img/advance-card-bttf.png">
+            <ion-card-content>
+                {{report.description}}
+            </ion-card-content>
+            <ion-row>
+                <ion-col>
+                    <button ion-button icon-left clear small>
+                        <ion-icon name="thumbs-up"></ion-icon>
+                        <div>{{report.likes}}</div>
+                    </button>
+                </ion-col>
+                <ion-col>
+                    <button ion-button icon-left clear small>
+                        <ion-icon name="thumbs-down"></ion-icon>
+                        <div>{{report.dislikes}}</div>
+                    </button>
+                </ion-col>
+                <ion-col>
+                    <button ion-button icon-left clear small>
+                        <ion-icon name="text"></ion-icon>
+                        <div>{{report.comments.length}}</div>
+                    </button>
+                </ion-col>
+            </ion-row>
+        </ion-card>
+    </ion-list>
+</ion-content>
+
