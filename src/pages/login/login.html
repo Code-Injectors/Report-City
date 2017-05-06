@@ -6,19 +6,19 @@
   </ion-navbar>
 </ion-header>
 <ion-content>
-    <div padding>
+   <form [formGroup]="loginForm" (ngSubmit)="login()">
         <ion-item>
-            <ion-label floating>Username</ion-label>
-            <ion-input type="text" [(ngModel)]="username"></ion-input>
+            <ion-label floating>Email*</ion-label>
+            <ion-input formControlName="email" type="text" [(ngModel)]="email" name="email" required></ion-input>
         </ion-item>
         <ion-item>
-            <ion-label floating >Password</ion-label>
-            <ion-input type="password" [(ngModel)]="password"></ion-input>
+            <ion-label floating >Password*</ion-label>
+            <ion-input formControlName="password" type="password" [(ngModel)]="password" name="password" required></ion-input>
         </ion-item>
-    </div>
-    <div padding>
-        <button ion-button block (click)="login()">Sign In</button>
-    </div>
+        <div padding>
+            <button ion-button block type="submit">Sign In</button>
+        </div>
+   </form>
     <ion-row>
         <ion-col text-center>
             <button ion-button clear item-right (click)="register()">Register Now</button>
