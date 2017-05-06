@@ -13,6 +13,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { CreateIssuePage } from "../pages/new_issue/new_issue";
 import { Camera } from "@ionic-native/camera";
 import { Transfer } from "@ionic-native/transfer";
+import {Geolocation} from '@ionic-native/geolocation';
 @NgModule({
   declarations: [
     MyApp,
@@ -41,7 +42,7 @@ import { Transfer } from "@ionic-native/transfer";
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    Transfer, Camera
+    Transfer, Camera, Geolocation
   ]
 })
 export class AppModule {}

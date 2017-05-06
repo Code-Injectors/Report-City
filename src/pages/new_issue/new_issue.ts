@@ -10,7 +10,7 @@ import {Geolocation} from '@ionic-native/geolocation';
   templateUrl: './new_issue.html'
 })
 export class CreateIssuePage {
-  private addedImages:string[] = ["fadsf"];
+  private addedImages:string[] = [];
   private newIssueForm: FormGroup;
 
   constructor(public navCtrl: NavController, private builder: FormBuilder, 
@@ -36,7 +36,18 @@ export class CreateIssuePage {
   }
 
   selectPhoto() {
-
+      this.camera.getPicture({
+          quality: 50,
+          destinationType: this.camera.DestinationType.FILE_URI,
+          sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
+          allowEdit: true,
+          encodingType: this.camera.EncodingType.JPEG,
+          saveToPhotoAlbum: false
+      }).then((imageUrl) => {
+          this.addedImages.push(imageUrl);
+      }, (err) => {
+          console.log(err);
+      });
   }
 
   createIssue(){
@@ -45,7 +56,7 @@ export class CreateIssuePage {
         this.sendImages();
     }).catch((error) => {
        //Please give your coordinates 
-       alert("oups");
+       console.log(error);
     });
   }
 
