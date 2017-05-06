@@ -2,3 +2,7 @@
         overflow: initial !important;
         white-space: initial !important;
     }
+
+    .item-md:last-child.item-block .item-inner {
+        border-bottom: 0px
+    }
