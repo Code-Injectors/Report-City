@@ -52,10 +52,11 @@ export class CreateIssuePage {
   }
 
   createIssue(){
-    console.log("ok");
-    this.locationAccuracy.canRequest().then((canRequest: boolean) => {
-
+      if(this.newIssueForm.valid)
+      {
+        this.locationAccuracy.canRequest().then((canRequest: boolean) => {
         if(canRequest) {
+            console.log(canRequest);
             // the accuracy option will be ignored by iOS
             this.locationAccuracy.request(this.locationAccuracy.REQUEST_PRIORITY_HIGH_ACCURACY).then(
             coordinates => {
@@ -64,8 +65,12 @@ export class CreateIssuePage {
             error => console.log('Error requesting location permissions', error)
             );
         }
-
     });
+      }
+      else
+      {
+
+      }
   }
 
   sendImages() {
