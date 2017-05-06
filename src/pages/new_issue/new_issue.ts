@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { Transfer, FileUploadOptions, TransferObject } from '@ionic-native/transfer';
+import {Geolocation} from '@ionic-native/geolocation';
 
 @Component({
   selector: 'new-issues-page',
@@ -39,7 +40,11 @@ export class CreateIssuePage {
   }
 
   createIssue(){
-    this.sendImages();
+    new Geolocation().getCurrentPosition().then(res => {
+        this.sendImages();
+    }).catch((error) => {
+       //Please give your coordinates
+    });
   }
 
   sendImages() {
