@@ -9,7 +9,7 @@ import { Transfer, FileUploadOptions, TransferObject } from '@ionic-native/trans
   templateUrl: './new_issue.html'
 })
 export class CreateIssuePage {
-  private addedImages = [];
+  private addedImages:string[] = [];
   private newIssueForm: FormGroup;
 
   constructor(public navCtrl: NavController, private builder: FormBuilder, private transfer: Transfer, private camera: Camera){
@@ -37,34 +37,23 @@ export class CreateIssuePage {
   }
 
   sendImages() {
-
-    let options = {
-      quality: 100
-    };
-
     for(let i =0; i< this.addedImages.length; i++)
     {
-
-        this.camera.getPicture(options).then((imageData) => {
-          // imageData is either a base64 encoded string or a file URI
-          // If it's base64:
-
         const fileTransfer: TransferObject = this.transfer.create();
 
-        let options1: FileUploadOptions = {
-            fileKey: 'file',
-            fileName: 'name.jpg',
-            headers: {}
+        var options: FileUploadOptions;
+        options.params = {
+          "type": this.addedImages[i].split(".")[1]
         }
+        options.mimeType = "multipart/form-data";
 
-        fileTransfer.upload(this.addedImages[i], 'http://localhost/ionic/upload.php', options1)
-          .then((data) => {
-            // success
-            alert("success");
-          }, (err) => {
-            // error
-            alert("error"+JSON.stringify(err));
-          });
+        fileTransfer.upload(this.addedImages[i], 'http://localhost/ionic/upload.php', options)
+        .then((data) => {
+          // success
+          alert("success");
+        }, (err) => {
+          // error
+          alert("error"+JSON.stringify(err));
         });
     }
   }
