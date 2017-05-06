@@ -13,10 +13,10 @@
     <ion-searchbar (ionInput)="getReports($event)"></ion-searchbar>
     <ion-list *ngFor="let report of reports">
         <ion-card>
-            <ion-item>
+            <ion-item><!--
                 <ion-avatar item-left>
                     <img src="https://www.gravatar.com/avatar/{{user.email_hash}}">
-                </ion-avatar>
+                </ion-avatar> -->
                 <h2>{{report.title}}</h2>
                 <p>{{report.category}}</p>
             </ion-item>
