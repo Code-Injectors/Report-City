@@ -1,3 +1,4 @@
+import { FilterModal } from './../components/shared/filter-modal/filter-modal';
 import { IssuesListPage } from './../pages/issues_list/issues_list';
 import { RegisterPage } from './../pages/register/register';
 import { LoginPage } from './../pages/login/login';
@@ -14,7 +15,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     MyApp,
     LoginPage,
     RegisterPage,
-    IssuesListPage
+    IssuesListPage,
+    FilterModal
   ],
   imports: [
     BrowserModule,
@@ -25,7 +27,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     MyApp,
     LoginPage,
     RegisterPage,
-    IssuesListPage
+    IssuesListPage,
+    FilterModal
   ],
   providers: [
     StatusBar,
