@@ -9,27 +9,33 @@ import { Transfer, FileUploadOptions, TransferObject } from '@ionic-native/trans
   templateUrl: './new_issue.html'
 })
 export class CreateIssuePage {
-  private addedImages:string[] = [];
+  private addedImages:string[] = ["fadsf"];
   private newIssueForm: FormGroup;
 
-  constructor(public navCtrl: NavController, private builder: FormBuilder, private transfer: Transfer, private camera: Camera){
+  constructor(public navCtrl: NavController, private builder: FormBuilder, 
+  private transfer: Transfer, private camera: Camera){
       this.newIssueForm = builder.group({
       'title': ['', Validators.required], 
       'description': ['', Validators.required]
     })
   }
 
-  takePicture() {
+  showAddFilesPopup() {
+  }
+
+  takePhoto() {
      this.camera.getPicture({
         destinationType: this.camera.DestinationType.FILE_URI,
-        sourceType : this.camera.PictureSourceType.CAMERA,
-        targetWidth: 1000,
-        targetHeight: 1000
+        sourceType : this.camera.PictureSourceType.CAMERA
     }).then((imageUrl) => {
         this.addedImages.push(imageUrl);
     }, (err) => {
         console.log(err);
     });
+  }
+
+  selectPhoto() {
+
   }
 
   createIssue(){

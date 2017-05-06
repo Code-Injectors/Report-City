@@ -17,11 +17,24 @@
         </ion-item> 
         <ion-row>
             <ion-col text-center>
-                <button ion-button clear item-right (click)="takePicture()">Capture</button>
+                <button type="button" ion-button clear item-right (click)="takePhoto()">Take Photo</button>
+            </ion-col>
+            <ion-col text-center>
+                <button type="button" ion-button clear item-right (click)="selectPhoto()">Select Photo</button>
             </ion-col>
     </ion-row>
         <div padding>
             <button ion-button block type="submit">Create Issue</button>
         </div>
    </form>
+   <ion-row>
+       <ion-list>
+           <ion-item *ngFor="let photo of addedImages">
+                <ion-thumbnail item-left>
+                    <img [src]="photo">
+                </ion-thumbnail>
+                <h2>{{photo}}</h2>
+           </ion-item>
+       </ion-list>
+   </ion-row>
 </ion-content>
