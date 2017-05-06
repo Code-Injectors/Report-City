@@ -11,6 +11,8 @@ import { MyApp } from './app.component';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { CreateIssuePage } from "../pages/new_issue/new_issue";
+import { Camera } from "@ionic-native/camera";
+import { Transfer } from "@ionic-native/transfer";
 @NgModule({
   declarations: [
     MyApp,
@@ -38,7 +40,8 @@ import { CreateIssuePage } from "../pages/new_issue/new_issue";
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    Transfer, Camera
   ]
 })
 export class AppModule {}
