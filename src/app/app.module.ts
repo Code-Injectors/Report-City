@@ -1,3 +1,4 @@
+import { IssuesListPage } from './../pages/issues_list/issues_list';
 import { RegisterPage } from './../pages/register/register';
 import { LoginPage } from './../pages/login/login';
 import { NgModule, ErrorHandler } from '@angular/core';
@@ -12,7 +13,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
   declarations: [
     MyApp,
     LoginPage,
-    RegisterPage
+    RegisterPage,
+    IssuesListPage
   ],
   imports: [
     BrowserModule,
@@ -22,7 +24,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
   entryComponents: [
     MyApp,
     LoginPage,
-    RegisterPage
+    RegisterPage,
+    IssuesListPage
   ],
   providers: [
     StatusBar,
