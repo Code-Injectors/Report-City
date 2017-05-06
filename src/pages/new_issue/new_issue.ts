@@ -14,7 +14,7 @@ export class CreateIssuePage {
   private newIssueForm: FormGroup;
 
   constructor(public navCtrl: NavController, private builder: FormBuilder, 
-  private transfer: Transfer, private camera: Camera, private geolocation:Geolocation,
+  private transfer: Transfer, private camera: Camera,
   private locationAccuracy: LocationAccuracy){
       this.newIssueForm = builder.group({
       'title': ['', Validators.required], 
