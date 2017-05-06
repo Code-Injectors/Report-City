@@ -10,7 +10,7 @@ import { MyApp } from './app.component';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
-
+import { CreateIssuePage } from "../pages/new_issue/new_issue";
 @NgModule({
   declarations: [
     MyApp,
@@ -18,7 +18,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     RegisterPage,
     IssuesListPage,
     FilterModal,
-    CommentModal
+    CommentModal,
+    CreateIssuePage
   ],
   imports: [
     BrowserModule,
@@ -31,7 +32,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     RegisterPage,
     IssuesListPage,
     FilterModal,
-    CommentModal
+    CommentModal,
+    CreateIssuePage
   ],
   providers: [
     StatusBar,
