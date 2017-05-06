@@ -1,0 +1,22 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      Create Report
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+    <form [formGroup]="newIssueForm" (ngSubmit)="createIssue()">
+        <ion-item>
+            <ion-label floating>Title*</ion-label>
+            <ion-input formControlName="title" type="text" [(ngModel)]="title" name="title" required></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label floating>Description*</ion-label>
+            <ion-textarea formControlName="description" type="text" [(ngModel)]="description" name="description" required></ion-textarea>
+        </ion-item> 
+        <div padding>
+            <button ion-button block type="submit">Create Issue</button>
+        </div>
+   </form>
+</ion-content>

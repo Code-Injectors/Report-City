@@ -1,3 +1,4 @@
+import { CreateIssuePage } from './../new_issue/new_issue';
 import { CommentModal } from './../../components/shared/comment-modal/comment-modal';
 import { Component } from '@angular/core';
 import { NavController, ModalController } from 'ionic-angular';
@@ -10,6 +11,13 @@ import { FilterModal } from "../../components/shared/filter-modal/filter-modal";
 export class IssuesListPage {
   private reports = [{
     "title": "report 1",
+    "category":"category 1",
+    "description": "description description description description descriptiondescription",
+    "likes": 10,
+    "dislikes": 20,
+    "comments": ["fsad","fsadf","fasdf"]
+  }, {
+    "title": "report 2",
     "category":"category 1",
     "description": "description description description description descriptiondescription",
     "likes": 10,
@@ -55,6 +63,10 @@ export class IssuesListPage {
   openCommentsModal(report_id) {
     let modal = this.modalCtrl.create(CommentModal);
     modal.present(); 
+  }
+
+  goToNewIssue() {
+    this.navCtrl.push(CreateIssuePage)
   }
 
 }
