@@ -15,6 +15,11 @@
             <ion-label floating>Description*</ion-label>
             <ion-textarea formControlName="description" type="text" [(ngModel)]="description" name="description" required></ion-textarea>
         </ion-item> 
+        <ion-row>
+            <ion-col text-center>
+                <button ion-button clear item-right (click)="takePicture()">Capture</button>
+            </ion-col>
+    </ion-row>
         <div padding>
             <button ion-button block type="submit">Create Issue</button>
         </div>
