@@ -56,11 +56,9 @@ export class CreateIssuePage {
       {
         this.locationAccuracy.canRequest().then((canRequest: boolean) => {
         if(canRequest) {
-            console.log(canRequest);
             // the accuracy option will be ignored by iOS
             this.locationAccuracy.request(this.locationAccuracy.REQUEST_PRIORITY_HIGH_ACCURACY).then(
-            coordinates => {
-                console.log(coordinates);   
+            coordinates => { 
             },
             error => console.log('Error requesting location permissions', error)
             );
@@ -86,10 +84,8 @@ export class CreateIssuePage {
 
         fileTransfer.upload(this.addedImages[i], 'http://localhost/ionic/upload.php', options)
         .then((data) => {
-          // success
           alert("success");
         }, (err) => {
-          // error
           alert("error"+JSON.stringify(err));
         });
     }
