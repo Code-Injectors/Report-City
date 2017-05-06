@@ -1,3 +1,4 @@
+import { IssuesListPage } from './../issues_list/issues_list';
 import { RegisterPage } from './../register/register';
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
@@ -20,10 +21,8 @@ export class LoginPage {
   }
 
   login() {
-      if(this.loginForm.valid)
-      {
-        console.log("nekkon");
-      }
+     // if(this.loginForm.valid)
+      this.navCtrl.push(IssuesListPage)
   }
 
   register() {
