@@ -1,3 +1,4 @@
+import { CommentModal } from './../../components/shared/comment-modal/comment-modal';
 import { Component } from '@angular/core';
 import { NavController, ModalController } from 'ionic-angular';
 import { FilterModal } from "../../components/shared/filter-modal/filter-modal";
@@ -49,4 +50,11 @@ export class IssuesListPage {
     let modal = this.modalCtrl.create(FilterModal);
     modal.present();
   }
+
+  
+  openCommentsModal(report_id) {
+    let modal = this.modalCtrl.create(CommentModal);
+    modal.present(); 
+  }
+
 }
