@@ -13,7 +13,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { CreateIssuePage } from "../pages/new_issue/new_issue";
 import { Camera } from "@ionic-native/camera";
 import { Transfer } from "@ionic-native/transfer";
-import {Geolocation} from '@ionic-native/geolocation';
+import { LocationAccuracy } from "@ionic-native/location-accuracy";
 @NgModule({
   declarations: [
     MyApp,
@@ -42,7 +42,7 @@ import {Geolocation} from '@ionic-native/geolocation';
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    Transfer, Camera, Geolocation
+    Transfer, Camera, LocationAccuracy
   ]
 })
 export class AppModule {}
