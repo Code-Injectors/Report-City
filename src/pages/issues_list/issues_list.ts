@@ -1,30 +1,32 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, ModalController } from 'ionic-angular';
+import { FilterModal } from "../../components/shared/filter-modal/filter-modal";
 
 @Component({
   selector: 'issues-list-page',
   templateUrl: 'issues_list.html'
 })
 export class IssuesListPage {
-private reports = [{
-  "title": "report 1",
-  "category":"category 1",
-  "description": "description description description description descriptiondescription",
-  "likes": 10,
-  "dislikes": 20,
-  "comments": ["fsad","fsadf","fasdf"]
-}, {
-  "title": "report 2",
-  "category":"category 1",
-  "description": "description description description description descriptiondescription",
-  "likes": 10,
-  "dislikes": 20,
-  "comments": ["fsad","fsadf","fasdf"]
-}];
-private user = {
-  "email_hash": "fsda"
-}
-  constructor(public navCtrl: NavController) {
+  private reports = [{
+    "title": "report 1",
+    "category":"category 1",
+    "description": "description description description description descriptiondescription",
+    "likes": 10,
+    "dislikes": 20,
+    "comments": ["fsad","fsadf","fasdf"]
+  }, {
+    "title": "report 2",
+    "category":"category 1",
+    "description": "description description description description descriptiondescription",
+    "likes": 10,
+    "dislikes": 20,
+    "comments": ["fsad","fsadf","fasdf"]
+  }];
+
+  private user = {
+    "email_hash": "fsda"
+  }
+  constructor(public navCtrl: NavController, public modalCtrl: ModalController) {
 
   }
 
@@ -40,5 +42,11 @@ private user = {
         return (item.title.toLowerCase().indexOf(searchQuery.toLowerCase()) > -1);
       })
     }
+  }
+
+  showFilterModal()
+  {
+    let modal = this.modalCtrl.create(FilterModal);
+    modal.present();
   }
 }
