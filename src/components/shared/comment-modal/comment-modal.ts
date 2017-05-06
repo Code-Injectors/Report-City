@@ -1,11 +1,9 @@
 import { Component } from '@angular/core';
-
 import { ViewController } from 'ionic-angular';
 
 @Component({
   selector: "comment-modal",
-  templateUrl: "./comment-modal.html",
-  styleUrls: ['./comment-modal.scss']
+  templateUrl: "./comment-modal.html"
 })
 export class CommentModal {
   public comments = [
