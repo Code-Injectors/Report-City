@@ -11,7 +11,7 @@ export class AuthProvider extends Provider {
       super(http);
   }
  
-  load(response?:any, error?:any): Observable<Response> {
-     return this.http.get('path/to/data.json').map(res => res.json());
+  login(email: string, password: string) : Observable<Response> {
+     return this.http.post(this.getDomain() + '/auth',{username: email, password: password}).map(res => res.json());
   }
 }
