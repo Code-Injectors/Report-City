@@ -1,3 +1,4 @@
+import { AuthProvider } from './../providers/AuthProvider';
 import { CommentModal } from './../components/shared/comment-modal/comment-modal';
 import { FilterModal } from './../components/shared/filter-modal/filter-modal';
 import { IssuesListPage } from './../pages/issues_list/issues_list';
@@ -14,6 +15,7 @@ import { CreateIssuePage } from "../pages/new_issue/new_issue";
 import { Camera } from "@ionic-native/camera";
 import { Transfer } from "@ionic-native/transfer";
 import { LocationAccuracy } from "@ionic-native/location-accuracy";
+import { Http, HttpModule } from "@angular/http";
 @NgModule({
   declarations: [
     MyApp,
@@ -26,7 +28,7 @@ import { LocationAccuracy } from "@ionic-native/location-accuracy";
   ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp),HttpModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -42,7 +44,7 @@ import { LocationAccuracy } from "@ionic-native/location-accuracy";
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    Transfer, Camera, LocationAccuracy
+    Transfer, Camera, LocationAccuracy, AuthProvider
   ]
 })
 export class AppModule {}
