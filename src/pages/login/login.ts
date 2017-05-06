@@ -1,19 +1,18 @@
+import { AuthProvider } from './../../providers/AuthProvider';
 import { IssuesListPage } from './../issues_list/issues_list';
 import { RegisterPage } from './../register/register';
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
-
 @Component({
   selector: 'login-page',
   templateUrl: 'login.html'
 })
 export class LoginPage {
-  private email = "";
-  private password = "";
   loginForm: FormGroup;
-  constructor(public navCtrl: NavController, private builder: FormBuilder) {
+  constructor(public navCtrl: NavController, private builder: FormBuilder,
+  private authProvider: AuthProvider) {
     this.loginForm = builder.group({
       'email': ['', Validators.required], //username: ['', Validators.compose([Validators.required, Validators.pattern('[a-zA-Z]*')])],
       'password': ['', Validators.required]
@@ -21,8 +20,17 @@ export class LoginPage {
   }
 
   login() {
-     // if(this.loginForm.valid)
-      this.navCtrl.push(IssuesListPage)
+      if(this.loginForm.valid)
+      {
+        console.log("ok");
+        this.authProvider.login(this.loginForm.value.email, this.loginForm.value.password).subscribe(_data => {
+          console.log(_data);
+          this.navCtrl.push(IssuesListPage)
+        },
+        _err => {
+
+        })
+      }
   }
 
   register() {

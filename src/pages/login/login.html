@@ -9,11 +9,11 @@
    <form [formGroup]="loginForm" (ngSubmit)="login()">
         <ion-item>
             <ion-label floating>Email*</ion-label>
-            <ion-input formControlName="email" type="text" [(ngModel)]="email" name="email" required></ion-input>
+            <ion-input formControlName="email" type="text" [(ngModel)]="email" value="chbakouras@injectors.com" name="email" required></ion-input>
         </ion-item>
         <ion-item>
             <ion-label floating >Password*</ion-label>
-            <ion-input formControlName="password" type="password" [(ngModel)]="password" name="password" required></ion-input>
+            <ion-input formControlName="password" type="password" [(ngModel)]="password" name="password" value="tralala" required></ion-input>
         </ion-item>
         <div padding>
             <button ion-button block type="submit">Sign In</button>
