@@ -14,7 +14,7 @@ export class CreateIssuePage {
   private newIssueForm: FormGroup;
 
   constructor(public navCtrl: NavController, private builder: FormBuilder, 
-  private transfer: Transfer, private camera: Camera){
+  private transfer: Transfer, private camera: Camera, private geolocation:Geolocation){
       this.newIssueForm = builder.group({
       'title': ['', Validators.required], 
       'description': ['', Validators.required]
@@ -40,15 +40,17 @@ export class CreateIssuePage {
   }
 
   createIssue(){
-    new Geolocation().getCurrentPosition().then(res => {
+    this.geolocation.getCurrentPosition().then(res => {
+    console.log(res);
         this.sendImages();
     }).catch((error) => {
-       //Please give your coordinates
+       //Please give your coordinates 
+       alert("oups");
     });
   }
 
   sendImages() {
-    for(let i =0; i< this.addedImages.length; i++)
+    for(let i=0; i<this.addedImages.length; i++)
     {
         const fileTransfer: TransferObject = this.transfer.create();
 
