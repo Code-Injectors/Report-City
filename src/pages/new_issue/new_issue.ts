@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { Transfer, FileUploadOptions, TransferObject } from '@ionic-native/transfer';
-import {Geolocation} from '@ionic-native/geolocation';
+import { LocationAccuracy } from '@ionic-native/location-accuracy';
 
 @Component({
   selector: 'new-issues-page',
@@ -14,7 +14,8 @@ export class CreateIssuePage {
   private newIssueForm: FormGroup;
 
   constructor(public navCtrl: NavController, private builder: FormBuilder, 
-  private transfer: Transfer, private camera: Camera, private geolocation:Geolocation){
+  private transfer: Transfer, private camera: Camera, private geolocation:Geolocation,
+  private locationAccuracy: LocationAccuracy){
       this.newIssueForm = builder.group({
       'title': ['', Validators.required], 
       'description': ['', Validators.required]
@@ -51,12 +52,19 @@ export class CreateIssuePage {
   }
 
   createIssue(){
-    this.geolocation.getCurrentPosition().then(res => {
-    console.log(res);
-        this.sendImages();
-    }).catch((error) => {
-       //Please give your coordinates 
-       console.log(error);
+    console.log("ok");
+    this.locationAccuracy.canRequest().then((canRequest: boolean) => {
+
+        if(canRequest) {
+            // the accuracy option will be ignored by iOS
+            this.locationAccuracy.request(this.locationAccuracy.REQUEST_PRIORITY_HIGH_ACCURACY).then(
+            coordinates => {
+                console.log(coordinates);   
+            },
+            error => console.log('Error requesting location permissions', error)
+            );
+        }
+
     });
   }
 
