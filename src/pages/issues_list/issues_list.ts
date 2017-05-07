@@ -19,7 +19,11 @@ export class IssuesListPage implements OnInit{
   }
 
   ngOnInit() {
-    this.reportsProvider.getReports().then(data => {
+    this.getAllReports();
+  }
+
+  getAllReports() {
+     this.reportsProvider.getReports().then(data => {
         data.subscribe(success => {
           this.reports = success.content;
         },
@@ -30,17 +34,24 @@ export class IssuesListPage implements OnInit{
     });
   }
 
-  getReports(searchEvent: any)
+  filterReports(searchEvent: any)
   {
     //TODO: Get data from backend
     let searchQuery = searchEvent.target.value;
 
     // if the value is an empty string don't filter the items
     if (searchQuery && searchQuery.trim() != '') {
-      this.reports = this.reports.filter((item) => {
-        return (item.title.toLowerCase().indexOf(searchQuery.toLowerCase()) > -1);
-      })
-    }
+         this.reportsProvider.getReports("?title="+searchQuery).then(data => {
+            data.subscribe(success => {
+              this.reports = success.content;
+            },
+            err => {
+              console.log(err);
+            })
+        });
+     }else {
+       this.getAllReports();
+     }
   }
 
   review(user_id, issue_index, voteStatus)

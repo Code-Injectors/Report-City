@@ -10,7 +10,7 @@
   
 </ion-header>
 <ion-content padding>
-    <ion-searchbar (ionInput)="getReports($event)"></ion-searchbar>
+    <ion-searchbar (ionInput)="filterReports($event)"></ion-searchbar>
     <ion-list *ngFor="let report of reports;  let i = index">
         <ion-card>
             <ion-item>
