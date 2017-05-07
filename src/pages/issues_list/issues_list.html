@@ -24,13 +24,13 @@
                 <ion-col>
                     <button ion-button icon-left clear small>
                         <ion-icon name="thumbs-up"></ion-icon>
-                        <div>{{report.upVotes}}</div>
+                        <div (click)="review(report.creator.id,report.id,true)">{{report.upVotes}}</div>
                     </button>
                 </ion-col>
                 <ion-col>
                     <button ion-button icon-left clear small>
                         <ion-icon name="thumbs-down"></ion-icon>
-                        <div>{{report.downVotes}}</div>
+                        <div (click)="review(report.creator.id,report.id,true)">{{report.downVotes}}</div>
                     </button>
                 </ion-col>
                 <ion-col>
