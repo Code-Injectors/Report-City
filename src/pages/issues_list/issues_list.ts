@@ -48,37 +48,41 @@ export class IssuesListPage implements OnInit{
     let hasSameVote = {index: -1, status: false};
     let hasVote = false;
     let comment = "";
-    for(let i=0;i<this.reports[issue_index].reviews; i++)
+    for(let i=0;i<this.reports[issue_index].allComments; i++)
     {
       if(this.reports[issue_index].reviews[i].user.id == global.user_id)
       {
         comment = this.reports[issue_index].reviews[i].comment;
-        if(this.reports[issue_index].reviews[i].isUpvote == voteStatus)
+        if(this.reports[issue_index].upvote == voteStatus)
         {
           hasSameVote.status = true;
+          hasSameVote.index = i;
         }
       }
     }
-
     if(hasSameVote.status)
     {
       //exeis idi kanei like / dislike
       return;
     }
 
-    if(hasVote && !hasSameVote.status)
+    if(hasVote)
     {
       //tou allazw to like se dislike kai antistrofa
       this.reports[issue_index].reviews[hasSameVote.index].upvote == voteStatus;
+      if(voteStatus) {
+        this.reports[issue_index].downVotes = this.reports[issue_index].downVotes - 1;
+      }
+      else {
+        this.reports[issue_index].upVotes = this.reports[issue_index].upVotes - 1;
+      }
     }
 
     if(voteStatus) {
       this.reports[issue_index].upVotes = this.reports[issue_index].upVotes + 1;
-      this.reports[issue_index].downVotes = this.reports[issue_index].downVotes - 1;
     }
     else {
        this.reports[issue_index].downVotes = this.reports[issue_index].downVotes + 1;
-       this.reports[issue_index].upVotes = this.reports[issue_index].upVotes - 1;
     }
     
 
@@ -105,8 +109,8 @@ export class IssuesListPage implements OnInit{
   }
 
   
-  openCommentsModal(report_id) {
-    let modal = this.modalCtrl.create(CommentModal);
+  openCommentsModal(issue_index) {
+    let modal = this.modalCtrl.create(CommentModal,{'comments': this.reports[issue_index].reviews});
     modal.present(); 
   }
 

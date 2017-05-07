@@ -28,13 +28,13 @@
                     </button>
                 </ion-col>
                 <ion-col>
-                    <button (click)="review(report.creator.id,i,true)" ion-button icon-left clear small>
+                    <button (click)="review(report.creator.id,i,false)" ion-button icon-left clear small>
                         <ion-icon name="thumbs-down"></ion-icon>
                         <div>{{report.downVotes}}</div>
                     </button>
                 </ion-col>
                 <ion-col>
-                    <button ion-button icon-left clear small (click)="openCommentsModal()">
+                    <button ion-button icon-left clear small (click)="openCommentsModal(i)">
                         <ion-icon name="text"></ion-icon>
                         <div>{{report.comments}}</div>
                     </button>
