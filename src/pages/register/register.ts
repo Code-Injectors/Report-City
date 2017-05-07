@@ -22,7 +22,7 @@ export class RegisterPage {
     if(this.registerForm.valid)
     {
       let data = {
-        "email": this.registerForm.value.email,
+        "username": this.registerForm.value.email,
         "password": this.registerForm.value.password,
         "firstname": this.registerForm.value.firstname,
         "lastname": this.registerForm.value.lastname
