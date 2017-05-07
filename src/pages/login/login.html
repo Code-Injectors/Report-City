@@ -6,17 +6,17 @@
   </ion-navbar>
 </ion-header>
 <ion-content>
-   <form [formGroup]="loginForm" (ngSubmit)="login()">
+   <form [formGroup]="loginForm">
         <ion-item>
             <ion-label floating>Email*</ion-label>
-            <ion-input formControlName="email" type="text" [(ngModel)]="email" value="chbakouras@injectors.com" name="email" required></ion-input>
+            <ion-input formControlName="email" type="text" value="chbakouras@injectors.com" name="email" required></ion-input>
         </ion-item>
         <ion-item>
             <ion-label floating >Password*</ion-label>
-            <ion-input formControlName="password" type="password" [(ngModel)]="password" name="password" value="tralala" required></ion-input>
+            <ion-input formControlName="password" type="password" name="password" value="tralala" required></ion-input>
         </ion-item>
         <div padding>
-            <button ion-button block type="submit">Sign In</button>
+            <button ion-button block type="button" (click)="login()">Sign In</button>
         </div>
    </form>
     <ion-row>
