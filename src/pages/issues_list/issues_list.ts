@@ -18,13 +18,15 @@ export class IssuesListPage implements OnInit{
   }
 
   ngOnInit() {
-    this.reportsProvider.getReports().subscribe(success => {
-      console.log(success);
-      this.reports = success;
-    },
-    err => {
-      console.log(err);
-    })
+    this.reportsProvider.getReports().then(data => {
+        data.subscribe(success => {
+          this.reports = success.content;
+        },
+        err => {
+          console.log(err);
+        })
+  
+    });
   }
 
   getReports(searchEvent: any)
