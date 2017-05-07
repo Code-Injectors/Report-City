@@ -13,8 +13,8 @@ export class RegisterPage {
     this.registerForm = builder.group({
       'email': ['', Validators.compose([Validators.required, Validators.pattern('(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$)')])], //username: ['', Validators.compose([Validators.required, Validators.pattern('[a-zA-Z]*')])],
       'password': ['', Validators.required],
-      'firstname': ['', Validators.required],
-      'lastname': ['', Validators.required]
+      'firstName': ['', Validators.required],
+      'lastName': ['', Validators.required]
     })
   }
 
@@ -24,8 +24,8 @@ export class RegisterPage {
       let data = {
         "email": this.registerForm.value.email,
         "password": this.registerForm.value.password,
-        "firstname": this.registerForm.value.firstname,
-        "lastname": this.registerForm.value.lastname
+        "firstName": this.registerForm.value.firstName,
+        "lastName": this.registerForm.value.lastName
       }
       this.authProvider.register(data).subscribe(success => {
            alert("User created.");
