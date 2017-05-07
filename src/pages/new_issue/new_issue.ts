@@ -59,6 +59,7 @@ export class CreateIssuePage {
             // the accuracy option will be ignored by iOS
             this.locationAccuracy.request(this.locationAccuracy.REQUEST_PRIORITY_HIGH_ACCURACY).then(
             coordinates => { 
+                
             },
             error => console.log('Error requesting location permissions', error)
             );
@@ -67,7 +68,7 @@ export class CreateIssuePage {
       }
       else
       {
-
+        alert("Please fill in necessary fields.")
       }
   }
 
