@@ -13,8 +13,8 @@
 </ion-header>
 
 <ion-content>
-    <ion-list>
-        <ion-item *ngFor="let comment of comments">
+    <ion-list *ngFor="let comment of comments">
+        <ion-item  *ngIf="!comment.hidden" >
             <ion-avatar item-left>
                 <img src="https://www.gravatar.com/avatar/{{comment.user.emailHash}}">
             </ion-avatar>
@@ -24,10 +24,10 @@
     </ion-list>
     <ion-item>
         <ion-label floating>Comment</ion-label>
-        <ion-textarea></ion-textarea>
+        <ion-textarea [(ngModel)]="newComment"></ion-textarea>
     </ion-item> 
     <ion-item>
-         <button block ion-button icon-right paddings>
+         <button block ion-button icon-right paddings (click)="sendComment()">
          Send Comment
         <ion-icon name="send"></ion-icon>
         </button>

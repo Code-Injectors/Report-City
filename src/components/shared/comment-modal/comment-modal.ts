@@ -7,13 +7,18 @@ import { ViewController } from 'ionic-angular';
 })
 export class CommentModal {
   public comments;
-
+  private newComment;
   constructor(public viewCtrl: ViewController) {
       this.comments = this.viewCtrl.data.comments;
+      this.newComment = "";
   }
 
   dismiss() {
     this.viewCtrl.dismiss();
+  }
+
+  sendComment() {
+      this.viewCtrl.dismiss({"comment": this.newComment});
   }
 
 }
