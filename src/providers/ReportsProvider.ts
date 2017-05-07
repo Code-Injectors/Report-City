@@ -35,4 +35,13 @@ export class ReportsProvider extends Provider {
           return data.map(res => res);
       });
   }
+  
+  getMediaId(): Promise<Observable<any>> {
+       return this.get(this.getDomain() + "/media").then(data => {
+          return data.map(res => res);
+       });
+   }
+
+   
+
 }

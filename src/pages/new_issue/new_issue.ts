@@ -28,6 +28,35 @@ export class CreateIssuePage implements OnInit{
     })
   }
 
+  showAddFilesPopup() {
+   }
+ 
+   takePhoto() {
+      this.camera.getPicture({
+         destinationType: this.camera.DestinationType.FILE_URI,
+         sourceType : this.camera.PictureSourceType.CAMERA
+     }).then((imageUrl) => {
+         this.addedImages.push(imageUrl);
+     }, (err) => {
+         console.log(err);
+     });
+   }
+ 
+   selectPhoto() {
+       this.camera.getPicture({
+          quality: 50,
+           destinationType: this.camera.DestinationType.FILE_URI,
+           sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
+           allowEdit: true,
+           encodingType: this.camera.EncodingType.JPEG,
+           saveToPhotoAlbum: false
+       }).then((imageUrl) => {
+           this.addedImages.push(imageUrl);
+       }, (err) => {
+           console.log(err);
+    });
+   }
+
   ngOnInit() {
         this.reportsProvider.getReportCategories().then(data => {
             data.subscribe(success => {
@@ -60,7 +89,11 @@ export class CreateIssuePage implements OnInit{
 
                          this.reportsProvider.createReport(data).then(data => {
                             data.subscribe(success => {
-                            this.categories = success.content;
+                                this.categories = success.content;
+                                if(Object.keys(this.addedImages).length)
+                                {
+                                    this.sendImages(success.id);
+                                }
                             },
                             err => {
                                 console.log(err);
@@ -84,23 +117,26 @@ export class CreateIssuePage implements OnInit{
             }
   }
 
-  sendImages() {
+  sendImages(report_id: string) {
     for(let i=0; i<this.addedImages.length; i++)
     {
-        const fileTransfer: TransferObject = this.transfer.create();
+        this.reportsProvider.getMediaId().then(mediasuccess=>{mediasuccess.subscribe(media => {
 
-        var options: FileUploadOptions;
-        options.params = {
-          "type": this.addedImages[i].split(".")[1]
-        }
-        options.mimeType = "multipart/form-data";
+            const fileTransfer: TransferObject = this.transfer.create();
 
-        fileTransfer.upload(this.addedImages[i], 'http://localhost/ionic/upload.php', options)
-        .then((data) => {
-          alert("success");
-        }, (err) => {
-          alert("error"+JSON.stringify(err));
-        });
+            var options: FileUploadOptions = {};
+            options.params = {
+                "type": this.addedImages[i].split(".")[1]
+            }
+            options.mimeType = "multipart/form-data";
+
+            fileTransfer.upload(this.addedImages[i], '/media/' + media.id , options)
+            .then((data) => {
+            alert("success");
+            }, (err) => {
+            alert("error"+JSON.stringify(err));
+            });
+        })})
     }
   }
 }
