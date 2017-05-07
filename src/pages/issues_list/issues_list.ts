@@ -88,13 +88,13 @@ export class IssuesListPage implements OnInit{
 
     this.reportsProvider.review(
       {
-        id:  this.reports[issue_index].id, 
+        report:  {id: this.reports[issue_index].id}, 
         isUpvote: voteStatus,
         comment: comment,
         user: {id: user_id}
       }
     ).then(success => success.subscribe(success => {
-          
+          this.reports[issue_index].reviews.push(success);
         },
         err => {
           console.log(err);
@@ -111,7 +111,22 @@ export class IssuesListPage implements OnInit{
   
   openCommentsModal(issue_index) {
     let modal = this.modalCtrl.create(CommentModal,{'comments': this.reports[issue_index].reviews});
-    modal.present(); 
+
+    modal.onDidDismiss(newComment => {
+      this.reportsProvider.review({
+        report:  {id: this.reports[issue_index].id}, 
+        isUpvote: this.reports[issue_index].voteup,
+        comment: newComment.comment,
+        user: {id: this.reports[issue_index].creator.id}
+      }).then(success => success.subscribe(success => {
+          this.reports[issue_index].reviews.push(success);
+          },
+          err => {
+            console.log(err);
+          })
+      );
+    }) 
+    modal.present();
   }
 
   goToNewIssue() {
