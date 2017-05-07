@@ -31,7 +31,7 @@ export class LoginPage {
             global.setUserId(success.userId);
         },
         err => {
-
+          alert("Wrong username or password.");
         });
       }
   }
