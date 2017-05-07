@@ -12,8 +12,8 @@ export class ReportsProvider extends Provider {
       super(http, storage);
   }
  
-  getReports(): Promise<Observable<any>> {
-      return this.get(this.getDomain() + "/reports").then(data => {
+  getReports(body: string=""): Promise<Observable<any>> {
+      return this.get(this.getDomain() + "/reports" + body).then(data => {
           return data.map(res => res);
       });
   }
@@ -22,5 +22,5 @@ export class ReportsProvider extends Provider {
       return this.post(this.getDomain() + "/reviews", data).then(data => {
           return data.map(res => res);
       });
-  }
+  } 
 }
