@@ -74,10 +74,10 @@ export class IssuesListPage implements OnInit{
 
     if(voteStatus) {
       this.reports[issue_index].upVotes = this.reports[issue_index].upVotes + 1;
-      this.reports[issue_index].upVotes = this.reports[issue_index].downVotes - 1;
+      this.reports[issue_index].downVotes = this.reports[issue_index].downVotes - 1;
     }
     else {
-       this.reports[issue_index].upVotes = this.reports[issue_index].downVotes + 1;
+       this.reports[issue_index].downVotes = this.reports[issue_index].downVotes + 1;
        this.reports[issue_index].upVotes = this.reports[issue_index].upVotes - 1;
     }
     
