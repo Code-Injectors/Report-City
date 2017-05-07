@@ -120,10 +120,10 @@ export class IssuesListPage implements OnInit{
         user: {id: this.reports[issue_index].creator.id}
       }).then(success => success.subscribe(success => {
           this.reports[issue_index].reviews.push(success);
-          },
-          err => {
-            console.log(err);
-          })
+        },
+        err => {
+          console.log(err);
+        })
       );
     }) 
     modal.present();

@@ -10,6 +10,7 @@ export class Provider {
     constructor(private _http: Http, private _storage: Storage)
     {
         this._domain = "http://46.101.247.89:8080";
+        //this._domain = "http://10.42.0.94:8080";
         this.getOptions();
     }
 
@@ -33,6 +34,7 @@ export class Provider {
 
     get(url: string, options=this._options) : Promise <Observable<any>>{
         return this.getToken().then(data => {
+            this.getOptions();
             options.headers.append("Authorization", data);
             return this._http.get(url, options).map(res => {
                 return res.json();
@@ -42,8 +44,8 @@ export class Provider {
     }
 
     post(url: string, body, options=this._options) : Promise<Observable<any>>{
-
          return this.getToken().then(data => {
+            this.getOptions();
             options.headers.append("Authorization", data);
             return this._http.post(url, body, options).map(res => res.json());
         });

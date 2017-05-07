@@ -19,7 +19,7 @@ export class ReportsProvider extends Provider {
   }
 
   review(data: any): Promise<Observable<any>> {
-      return this.post(this.getDomain() + "/review", data).then(data => {
+      return this.post(this.getDomain() + "/reviews", data).then(data => {
           return data.map(res => res);
       });
   }
