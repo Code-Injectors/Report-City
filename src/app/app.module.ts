@@ -16,6 +16,7 @@ import { Camera } from "@ionic-native/camera";
 import { Transfer } from "@ionic-native/transfer";
 import { LocationAccuracy } from "@ionic-native/location-accuracy";
 import { Http, HttpModule } from "@angular/http";
+import { IonicStorageModule } from "@ionic/storage/es2015";
 @NgModule({
   declarations: [
     MyApp,
@@ -28,7 +29,8 @@ import { Http, HttpModule } from "@angular/http";
   ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(MyApp),HttpModule
+    IonicModule.forRoot(MyApp),HttpModule,
+    IonicStorageModule.forRoot()
   ],
   bootstrap: [IonicApp],
   entryComponents: [
