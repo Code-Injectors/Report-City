@@ -22,10 +22,8 @@ export class LoginPage {
   login() {
       if(this.loginForm.valid)
       {
-        console.log("ok");
         this.authProvider.login(this.loginForm.value.email, this.loginForm.value.password).subscribe(_data => {
-          console.log(_data);
-          this.navCtrl.push(IssuesListPage)
+          this.navCtrl.setRoot(IssuesListPage);
         },
         _err => {
 
