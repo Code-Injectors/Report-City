@@ -6,30 +6,10 @@ import { ViewController } from 'ionic-angular';
   templateUrl: "./comment-modal.html"
 })
 export class CommentModal {
-  public comments = [
-      {
-          "comment": "blabla blabla blabla blabla blabla blabla blabla blabla blabla blabla blabla blabla",
-          "user": "George Tzinos asd afsd fasd fas dfas df sadf asd",
-          "email_hash": "fsad"
-      },
-       {
-          "comment": "blabla",
-          "user": "George Tzinos",
-          "email_hash": "fsad"
-      },
-       {
-          "comment": "blabla",
-          "user": "George Tzinos",
-          "email_hash": "fsad"
-      },
-       {
-          "comment": "blabla",
-          "user": "George Tzinos",
-          "email_hash": "fsad"
-      }
-  ]
+  public comments;
 
   constructor(public viewCtrl: ViewController) {
+      this.comments = this.viewCtrl.data.comments;
   }
 
   dismiss() {

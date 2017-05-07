@@ -16,9 +16,9 @@
     <ion-list>
         <ion-item *ngFor="let comment of comments">
             <ion-avatar item-left>
-                <img src="https://www.gravatar.com/avatar/{{comment.email_hash}}">
+                <img src="https://www.gravatar.com/avatar/{{comment.user.emailHash}}">
             </ion-avatar>
-            <h2>{{comment.user}}</h2>
+            <h2>{{comment.user.firstName}} {{comment.user.lastName}}</h2>
             <p>{{comment.comment}}</p>
         </ion-item>
     </ion-list>
