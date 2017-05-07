@@ -1,42 +1,30 @@
 import { CreateIssuePage } from './../new_issue/new_issue';
 import { CommentModal } from './../../components/shared/comment-modal/comment-modal';
-import { Component } from '@angular/core';
+import { Component , OnInit} from '@angular/core';
 import { NavController, ModalController } from 'ionic-angular';
 import { FilterModal } from "../../components/shared/filter-modal/filter-modal";
+import { ReportsProvider } from "../../providers/ReportsProvider";
 
 @Component({
   selector: 'issues-list-page',
-  templateUrl: 'issues_list.html'
+  templateUrl: 'issues_list.html',
+  providers: [ReportsProvider]
 })
-export class IssuesListPage {
-  private reports = [{
-    "title": "report 1",
-    "category":"category 1",
-    "description": "description description description description descriptiondescription",
-    "likes": 10,
-    "dislikes": 20,
-    "comments": ["fsad","fsadf","fasdf"]
-  }, {
-    "title": "report 2",
-    "category":"category 1",
-    "description": "description description description description descriptiondescription",
-    "likes": 10,
-    "dislikes": 20,
-    "comments": ["fsad","fsadf","fasdf"]
-  }, {
-    "title": "report 2",
-    "category":"category 1",
-    "description": "description description description description descriptiondescription",
-    "likes": 10,
-    "dislikes": 20,
-    "comments": ["fsad","fsadf","fasdf"]
-  }];
+export class IssuesListPage implements OnInit{
+  private reports;
 
-  private user = {
-    "email_hash": "fsda"
+  constructor(public navCtrl: NavController, public modalCtrl: ModalController, public reportsProvider: ReportsProvider) {
+
   }
-  constructor(public navCtrl: NavController, public modalCtrl: ModalController) {
 
+  ngOnInit() {
+    this.reportsProvider.getReports().subscribe(success => {
+      console.log(success);
+      this.reports = success;
+    },
+    err => {
+      console.log(err);
+    })
   }
 
   getReports(searchEvent: any)
