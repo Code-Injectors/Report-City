@@ -23,4 +23,16 @@ export class ReportsProvider extends Provider {
           return data.map(res => res);
       });
   } 
+
+  createReport(data: any): Promise<Observable<any>> {
+      return this.post(this.getDomain() + "/reports", data).then(data => {
+          return data.map(res => res);
+      });
+  }
+
+  getReportCategories(): Promise<Observable<any>> {
+      return this.get(this.getDomain() + "/categories").then(data => {
+          return data.map(res => res);
+      });
+  }
 }

@@ -9,12 +9,18 @@
     <form [formGroup]="newIssueForm" (ngSubmit)="createIssue()">
         <ion-item>
             <ion-label floating>Title*</ion-label>
-            <ion-input formControlName="title" type="text" [(ngModel)]="title" name="title" required></ion-input>
+            <ion-input formControlName="title" type="text" name="title" required></ion-input>
         </ion-item>
         <ion-item>
             <ion-label floating>Description*</ion-label>
-            <ion-textarea formControlName="description" type="text" [(ngModel)]="description" name="description" required></ion-textarea>
+            <ion-textarea formControlName="description" type="text" name="description" required></ion-textarea>
         </ion-item> 
+        <ion-item>
+            <ion-label>Categories</ion-label>
+            <ion-select formControlName="selectedCategory" name="selectedCategory">
+                <ion-option *ngFor="let category of categories" value="{{category.id}}">{{category.name}}</ion-option>
+            </ion-select>
+        </ion-item>
         <ion-row>
             <ion-col text-center>
                 <button type="button" ion-button clear item-right (click)="takePhoto()">Take Photo</button>

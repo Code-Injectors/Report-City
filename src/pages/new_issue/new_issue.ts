@@ -1,75 +1,87 @@
+import * as globals from '../../app/globals';
+import { ReportsProvider } from './../../providers/ReportsProvider';
 import {Camera} from '@ionic-native/camera';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { Transfer, FileUploadOptions, TransferObject } from '@ionic-native/transfer';
+import { Geolocation } from '@ionic-native/geolocation';
 import { LocationAccuracy } from '@ionic-native/location-accuracy';
 
 @Component({
   selector: 'new-issues-page',
-  templateUrl: './new_issue.html'
+  templateUrl: './new_issue.html',
+  providers: [ReportsProvider,Geolocation,LocationAccuracy]
 })
-export class CreateIssuePage {
+export class CreateIssuePage implements OnInit{
   private addedImages:string[] = [];
   private newIssueForm: FormGroup;
+  private categories = [];
 
   constructor(public navCtrl: NavController, private builder: FormBuilder, 
   private transfer: Transfer, private camera: Camera,
-  private locationAccuracy: LocationAccuracy){
+  private reportsProvider: ReportsProvider, private geolocation: Geolocation, private locationAccuracy:LocationAccuracy){
       this.newIssueForm = builder.group({
       'title': ['', Validators.required], 
-      'description': ['', Validators.required]
+      'description': ['', Validators.required],
+      'selectedCategory': ['', Validators.required]
     })
   }
 
-  showAddFilesPopup() {
-  }
-
-  takePhoto() {
-     this.camera.getPicture({
-        destinationType: this.camera.DestinationType.FILE_URI,
-        sourceType : this.camera.PictureSourceType.CAMERA
-    }).then((imageUrl) => {
-        this.addedImages.push(imageUrl);
-    }, (err) => {
-        console.log(err);
-    });
-  }
-
-  selectPhoto() {
-      this.camera.getPicture({
-          quality: 50,
-          destinationType: this.camera.DestinationType.FILE_URI,
-          sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
-          allowEdit: true,
-          encodingType: this.camera.EncodingType.JPEG,
-          saveToPhotoAlbum: false
-      }).then((imageUrl) => {
-          this.addedImages.push(imageUrl);
-      }, (err) => {
-          console.log(err);
-      });
+  ngOnInit() {
+        this.reportsProvider.getReportCategories().then(data => {
+            data.subscribe(success => {
+              this.categories = success.content;
+            },
+            err => {
+              console.log(err);
+            })
+        });
   }
 
   createIssue(){
       if(this.newIssueForm.valid)
       {
+          /*
         this.locationAccuracy.canRequest().then((canRequest: boolean) => {
-        if(canRequest) {
-            // the accuracy option will be ignored by iOS
-            this.locationAccuracy.request(this.locationAccuracy.REQUEST_PRIORITY_HIGH_ACCURACY).then(
-            coordinates => { 
-                
-            },
-            error => console.log('Error requesting location permissions', error)
-            );
-        }
-    });
-      }
-      else
-      {
-        alert("Please fill in necessary fields.")
-      }
+            if(canRequest) {
+                console.log(canRequest);
+                // the accuracy option will be ignored by iOS
+                this.locationAccuracy.request(this.locationAccuracy.REQUEST_PRIORITY_HIGH_ACCURACY).then(
+                requestobj => { */
+                 /*   this.geolocation.getCurrentPosition(coordinates => {
+                        console.log(coordinates); */
+                        let data = {
+                            'title': this.newIssueForm.value.title,
+                            "description": this.newIssueForm.value.description,
+                            "creator": {id: globals.user_id},
+                            "category": {id: this.newIssueForm.value.selectedCategory}
+                        }
+
+                         this.reportsProvider.createReport(data).then(data => {
+                            data.subscribe(success => {
+                            this.categories = success.content;
+                            },
+                            err => {
+                                console.log(err);
+                            })
+                        });
+               /*         console.log(coordinates);
+                        this.reportsProvider.createReport(data).then(data => {
+                            data.subscribe(success => {
+                            this.categories = success.content;
+                            },
+                            err => {
+                                console.log(err);
+                            })
+                        });
+                    }) */
+                   /* error => console.log('Error requesting location permissions', error) });*/
+            }
+            else
+            {
+                alert("Please fill in necessary fields.")
+            }
   }
 
   sendImages() {
