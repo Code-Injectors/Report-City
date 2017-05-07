@@ -113,6 +113,9 @@ export class IssuesListPage implements OnInit{
     let modal = this.modalCtrl.create(CommentModal,{'comments': this.reports[issue_index].reviews});
 
     modal.onDidDismiss(newComment => {
+      if(!newComment.comment){
+        return;
+      }
       this.reportsProvider.review({
         report:  {id: this.reports[issue_index].id}, 
         isUpvote: this.reports[issue_index].voteup,
