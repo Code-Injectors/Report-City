@@ -11,7 +11,7 @@
 </ion-header>
 <ion-content padding>
     <ion-searchbar (ionInput)="getReports($event)"></ion-searchbar>
-    <ion-list *ngFor="let report of reports">
+    <ion-list *ngFor="let report of reports;  let i = index">
         <ion-card>
             <ion-item>
                 <h2>{{report.title}}</h2>
@@ -22,15 +22,15 @@
             </ion-card-content>
             <ion-row>
                 <ion-col>
-                    <button ion-button icon-left clear small>
+                    <button (click)="review(report.creator.id,i,true)" ion-button icon-left clear small>
                         <ion-icon name="thumbs-up"></ion-icon>
-                        <div (click)="review(report.creator.id,report.id,true)">{{report.upVotes}}</div>
+                        <div>{{report.upVotes}}</div>
                     </button>
                 </ion-col>
                 <ion-col>
-                    <button ion-button icon-left clear small>
+                    <button (click)="review(report.creator.id,i,true)" ion-button icon-left clear small>
                         <ion-icon name="thumbs-down"></ion-icon>
-                        <div (click)="review(report.creator.id,report.id,true)">{{report.downVotes}}</div>
+                        <div>{{report.downVotes}}</div>
                     </button>
                 </ion-col>
                 <ion-col>
