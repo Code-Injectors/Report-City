@@ -26,7 +26,7 @@ export class AuthProvider extends Provider {
       headers.append('Content-Type', 'application/json');
       let options = new RequestOptions({ headers: headers});
 
-     return this.http.post(this.getDomain() + '/auth/register',{data}, options)
+     return this.http.post(this.getDomain() + '/auth/register',data, options)
      .map(res => res.json());
   }
 }
